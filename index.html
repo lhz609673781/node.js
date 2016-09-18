@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>用户登陆</title>
+    <script>
+        function $(name){
+            return document.getElementsByName(name).item(0);
+        }
+        function checkInfo(){
+            var uname=$("uname").value;
+            var pwd=$("pwd").value;
+
+            if(uname==""){
+                alert("用户不能为空...");
+                return false;
+            }
+
+            if(pwd==""){
+                alert("密码不能为空...");
+                return false;
+            }
+            return true;
+            //提交表单
+            //document.getElementById("myform").submit();
+        }
+
+    </script>
+</head>
+<body>
+    <form action="http://127.0.0.1:6868" method='POST' onsubmit="return checkInfo()" id="myform">
+        <label>用户名：</label>
+        <input type='text' name='uname'/>
+        <label>密码：</label>
+         <input type='password' name='pwd'/>
+         <input type='submit' value='提交' onclick="checkInfo()">
+    </form>
+    <a href="http://127.0.0.1:8888/showreg">注册新账号</a>
+</body>
+</html>

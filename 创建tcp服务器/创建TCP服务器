@@ -1,0 +1,42 @@
+var  net=require("net");
+//创建服务器
+/*var server=net.createServer(function(socket){
+    console.info("有客户端连接上来了。。");
+    console.info(socket);
+});
+server.listen(8888,function(){
+    console.info("服务器开始监听...");
+   var addr=server.address();
+  console.info("监听的地址信息为：%j",addr);
+})
+*/
+
+
+//connection
+/*var server1=net.createServer().listen(8888);
+server1.on("connection",function(socket){
+ console.info("有客户连接上来了");
+    //获取客户的访问地址
+    console.info(socket.address());
+})*/
+
+
+var server=net.createServer(function(socket){
+    server.getConnections(function(err,count){
+        console.info("当前有%d个人在线。。。",count);
+        server.maxConnections=2;//设置最大的连接数
+        console.info("当前TCP服务器允许的最大连接数为：%d",server.maxConnections);
+            if(count==2){
+            console.info("服务器正在被关闭");
+            server.close(function(){//此时服务器不一定马上关闭，只会拒绝新的连接，当所有的连接都断开后才会被关闭
+                console.info("TCP服务器已经关闭");
+            })
+        }
+    })
+})
+//server.listen(8888);
+//当设置端口号为0时，有系统自动分配一个端口
+server.listen(0,function(){
+    //                      生成的这个端口号输入到浏览器就可以拿到上面的数据
+    console.info("服务器开始启动，监听端口号为:%j",server.address());
+})
